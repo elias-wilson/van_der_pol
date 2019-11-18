@@ -23,7 +23,7 @@ C = eye(2);
 
 % MPC Parameters
 Ns = 100; % Horizon (Steps)
-gam = 0.1; % Learning Rate
+gam = 0.5; % Learning Rate
 Q = [10 0; 0 1];
 R = 0.0001;
 
@@ -137,7 +137,7 @@ for ii = 1:n-1
             dL_dU(jj) = dL_dU(jj) + dL_dx;
             
             % Cost
-            L = L + x_(:,jj)'*Q*x_(:,jj) + u_(:,jj)'*R*u_(:,jj);
+            L = L + (x_(:,jj)-xr_(:,jj))'*Q*(x_(:,jj)-xr_(:,jj)) + u_(:,jj)'*R*u_(:,jj);
         end
         
         % Change in Cost
