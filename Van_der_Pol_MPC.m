@@ -149,10 +149,10 @@ for ii = 1:n-1
         u_ = u_shift + cont_low;
         
         clc;
-        disp(ii/length(t));
-        disp(ij);
-        disp(del);
-        disp(L);
+        disp(ii/length(t)); % Progress
+        disp(ij); % Iteration
+        disp(del); % Convergence
+        disp(L); % Cost
     end
     
     % Implement First Control Input
