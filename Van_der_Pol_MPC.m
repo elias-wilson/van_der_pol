@@ -23,7 +23,7 @@ C = eye(2);
 
 % MPC Parameters
 Ns = 100; % Horizon (Steps)
-gam = 0.5; % Learning Rate
+gam = 0.1; % Learning Rate
 Q = [10 0; 0 1];
 R = 0.0001;
 
@@ -194,6 +194,6 @@ subplot(313);
 plot(t(1:end-1),u,'Linewidth',1.5);
 xlabel('Time (s)');
 ylabel('Control');
-ylim([-cont_low(1) cont_high(1)]);
+ylim([cont_low(1) cont_high(1)]);
 grid minor;
 
