@@ -6,7 +6,7 @@ close all;
 
 % Simulation Time
 dt = 0.01;
-t = 0:dt:10;
+t = 0:dt:3;
 
 % System Parameters (Van der Pol)
 k = 1;
@@ -15,14 +15,14 @@ m = 1;
 B = [0; 1];
 
 % Initial Conditions
-x0 = [-1 -3]'; % States
+x0 = [1 0]'; % States
 xr0 = [0 0]'; % Reference States
 
 % Output Matrix
 C = eye(2);
 
 % MPC Parameters
-Ns = 100; % Horizon (Steps)
+Ns = 10; % Horizon (Steps)
 gam = 0.1; % Learning Rate
 Q = [10 0; 0 1];
 R = 0.0001;
@@ -83,7 +83,7 @@ for ii = 1:n-1
     ij = 0;
     del = 1;
     L = 10000;
-    while del > 0.001
+    while del > 0.0001
         ij = ij+1;
         L0 = L;
         L = 0;
