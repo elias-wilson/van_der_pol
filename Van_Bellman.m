@@ -20,9 +20,9 @@ x(:,1) = x0;
 u = zeros(1,length(t)-1);
 
 %% Dynamic Programming
-
+xlim = 4;
 co = linspace(-8,8,20);
-st = linspace(-10,10,20);
+st = linspace(-xlim,xlim,20);
 c = zeros(length(st), length(st), length(co));
 
 for x1 = 1:length(st)
@@ -31,7 +31,7 @@ for x1 = 1:length(st)
     for x2 = 1:length(st)
         for uu = 1:length(co)
             xp = int([st(x1); st(x2)],co(uu),mu,dt);
-            if any(abs(xp) > 10)
+            if any(abs(xp) > xlim)
                 c(x1,x2,uu) = inf;
             else
                 c(x1,x2,uu) = cst(xp,0) + cst([st(x1); st(x2)],co(uu));
@@ -76,6 +76,8 @@ f3 = dt*vp(x+0.5*f2,mu,u);
 f4 = dt*vp(x+f3,mu,u);
 
 x = x + 1/6*(f1+2*f2+2*f3+f4);
+
+% x = x + dt*vp(x,mu,u);
 end
 
 function xd = vp(x,mu,u)
@@ -83,9 +85,9 @@ xd = [x(2); -mu*(x(1)^2-1)*x(2)-x(1)+u];
 end
 
 function J = cst(x,u)
-Q = [10 0; 0 1];
+Q = [1 0; 0 1];
 R = 0.005;
-J = sumsqr(Q*x) + R*u^2;
+J = x'*Q*x + R*u^2;
 end
 
 function id = ind(v,x)
