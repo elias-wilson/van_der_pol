@@ -77,6 +77,8 @@ f3 = dt*vp(x+0.5*f2,mu,u);
 f4 = dt*vp(x+f3,mu,u);
 
 x = x + 1/6*(f1+2*f2+2*f3+f4);
+
+% x = x + dt*vp(x,mu,u);
 end
 
 function xd = vp(x,mu,u)
@@ -84,9 +86,15 @@ xd = [x(2); -mu*(x(1)^2-1)*x(2)-x(1)+u];
 end
 
 function J = cst(x,u)
+<<<<<<< HEAD
 Q = [10 0; 0 10];
 R = 0.0005;
 J = sumsqr(Q*x) + R*u^2;
+=======
+Q = [1 0; 0 1];
+R = 0.005;
+J = x'*Q*x + R*u^2;
+>>>>>>> a1b83edce6f39d9d65df3e613587b98d8acf0f31
 end
 
 function id = ind(v,x)
